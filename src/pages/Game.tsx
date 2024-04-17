@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import GameService from '../services/GameService';
+import UserService from '../services/UserService';
 import Grid from '../components/Grid';
 
 type GameParams = {
@@ -9,16 +10,16 @@ type GameParams = {
 
 const Game: React.FC = () => {
   const { username } = useParams<GameParams>();
-  const [points, setPoints] = useState(0);
+  const [points, setPoints] = useState(UserService.getPoints());
   const [difficulty, setDifficulty] = useState('bajo');
   const [molePosition, setMolePosition] = useState<number>(-1); // Initialize mole position
-
 
     // Function to handle whacking the mole
     const handleWhack = () => {
       // Increase points based on difficulty
       const pointsIncrement = GameService.getPointsIncrement(difficulty);
       setPoints(points + pointsIncrement);
+      UserService.setPoints(points)
 
       // Hide the whacked mole
       setMolePosition(-1);

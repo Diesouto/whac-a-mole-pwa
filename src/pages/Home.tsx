@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button'
+import UserService from '../services/UserService';
 
 const Home: React.FC = () => {
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState(UserService.getUser() || '');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (username.trim() !== '') {
+      navigate(`/game/${username}`);
+    }
+  });
 
   const handleStartGame = () => {
     if (username.trim() !== '') {
