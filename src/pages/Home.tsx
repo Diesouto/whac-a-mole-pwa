@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Button from '../components/Button'
 
 const Home: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -22,7 +23,7 @@ const Home: React.FC = () => {
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
-      <button onClick={handleStartGame}>Comenzar Juego</button>
+      <Button onClick={handleStartGame} children="Start"></Button>
     </div>
   );
 };
