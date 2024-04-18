@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface ButtonProps {
   onClick: () => void;
@@ -8,7 +8,11 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({ onClick, children, className }) => {
   return (
-    <button className={className} onClick={onClick}>
+    <button
+      type="button"
+      className={"btn btn-primary " + className}
+      onClick={onClick}
+    >
       {children}
     </button>
   );
