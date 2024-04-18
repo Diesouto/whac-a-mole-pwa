@@ -3,13 +3,9 @@ import { useParams } from "react-router-dom";
 import GameService from "../services/GameService";
 import UserService from "../services/UserService";
 import Grid from "../components/Grid";
-
-type GameParams = {
-  username: string;
-};
+import Button from "../components/Button";
 
 const Game: React.FC = () => {
-  const { username } = useParams<GameParams>();
   const [points, setPoints] = useState(UserService.getPoints());
   const [difficulty, setDifficulty] = useState("bajo");
   const [molePosition, setMolePosition] = useState<number>(-1); // Initialize mole position
@@ -33,7 +29,7 @@ const Game: React.FC = () => {
 
   return (
     <div>
-      <h2>Bienvenido, {username}!</h2>
+      <h2>Bienvenido, {UserService.getUser()}!</h2>
       <p>Puntos: {points}</p>
       <select
         value={difficulty}
@@ -46,7 +42,7 @@ const Game: React.FC = () => {
       <main>
         <Grid molePosition={molePosition} handleWhack={handleWhack} />
       </main>
-      <button onClick={UserService.logOut}>Stop</button>
+      <Button onClick={UserService.logOut}>Stop</Button>
     </div>
   );
 };

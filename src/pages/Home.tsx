@@ -9,7 +9,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     if (username.trim() !== "") {
-      navigate(`/game/${username}`);
+      navigate(`/game/`);
     }
   }, []);
 
@@ -19,7 +19,7 @@ const Home: React.FC = () => {
       return;
     }
     UserService.setUser(username);
-    navigate(`/game/${username}`);
+    navigate(`/game/`);
   };
 
   return (
@@ -31,7 +31,7 @@ const Home: React.FC = () => {
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
-      <Button onClick={handleStartGame} children="Start"></Button>
+      <Button onClick={handleStartGame}>Start</Button>
     </div>
   );
 };
