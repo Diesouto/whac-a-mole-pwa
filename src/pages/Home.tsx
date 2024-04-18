@@ -4,13 +4,11 @@ import Button from "../components/Button";
 import UserService from "../services/UserService";
 
 const Home: React.FC = () => {
-  const [username, setUsername] = useState(UserService.getUser() || "");
+  const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (username.trim() !== "") {
-      navigate(`/game/`);
-    }
+    UserService.setUser("");
   }, []);
 
   const handleStartGame = () => {
@@ -26,6 +24,7 @@ const Home: React.FC = () => {
     <div>
       <h1>Bienvenido al Juego de Toca al Topo</h1>
       <input
+        name="nombre"
         type="text"
         placeholder="Introduce tu nombre"
         value={username}

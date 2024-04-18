@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import GameService from "../services/GameService";
 import UserService from "../services/UserService";
 import Grid from "../components/Grid";
@@ -9,6 +9,7 @@ const Game: React.FC = () => {
   const [points, setPoints] = useState(UserService.getPoints());
   const [difficulty, setDifficulty] = useState("bajo");
   const [molePosition, setMolePosition] = useState<number>(-1); // Initialize mole position
+  const navigate = useNavigate();
 
   const handleWhack = () => {
     const pointsIncrement = GameService.getPointsIncrement(difficulty);
@@ -17,6 +18,17 @@ const Game: React.FC = () => {
     // Hide the whacked mole
     setMolePosition(-1);
   };
+
+  function logOut() {
+    UserService.logOut();
+    navigate("/");
+  }
+
+  useEffect(() => {
+    if (!UserService.getUser()) {
+      logOut();
+    }
+  }, []);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -42,7 +54,7 @@ const Game: React.FC = () => {
       <main>
         <Grid molePosition={molePosition} handleWhack={handleWhack} />
       </main>
-      <Button onClick={UserService.logOut}>Stop</Button>
+      <Button onClick={logOut}>Stop</Button>
     </div>
   );
 };

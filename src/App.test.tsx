@@ -10,6 +10,11 @@ import GameService from "./services/GameService";
 // Mock UserService and GameService methods
 jest.mock("./services/UserService");
 jest.mock("./services/GameService");
+const mockUsedNavigate = jest.fn();
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: () => mockUsedNavigate,
+}));
 
 describe("Home Component", () => {
   test("renders input field and button", () => {
