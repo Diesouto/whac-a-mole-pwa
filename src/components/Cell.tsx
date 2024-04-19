@@ -20,6 +20,8 @@ const Cell: React.FC<CellProps> = ({ onWhack, isMoleVisible }) => {
       style={{
         width: "calc(60vw/4)",
         height: "calc(60vw/4)",
+        maxWidth: "100px",
+        maxHeight: "100px",
       }}
       data-testid="cell"
     >

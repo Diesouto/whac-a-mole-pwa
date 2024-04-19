@@ -45,8 +45,8 @@ const Game: React.FC = () => {
   }, [difficulty, moleNumber]);
 
   const stopGame = () => {
-    setPoints(0);
-    // setMolePositions([]);
+    // setPoints(0);
+    setMolePositions([]);
     clearInterval(intervalIdRef.current!);
     setGameRunning(false);
   };
@@ -100,7 +100,10 @@ const Game: React.FC = () => {
           molePositions={molePositions}
           handleWhack={handleWhack}
         />
-        <Button onClick={gameRunning ? stopGame : startGame}>
+        <Button
+          className="w-25 mx-auto"
+          onClick={gameRunning ? stopGame : startGame}
+        >
           {gameRunning ? "Stop" : "Start"}
         </Button>
       </section>
