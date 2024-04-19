@@ -14,7 +14,7 @@ const Game: React.FC = () => {
   const navigate = useNavigate();
   const intervalIdRef = useRef<NodeJS.Timeout | null>(null);
 
-  const cellNumber = 9; // Define the maximum number of cells
+  const cellNumber = 12; // Define the maximum number of cells
   const moleNumber = 2; // Define max number of moles
 
   const handleWhack = (position: number) => {
@@ -91,7 +91,10 @@ const Game: React.FC = () => {
         </select>
       </nav>
       <section className="d-flex flex-column justify-content-around text-center">
-        <p>{strings.game.difficultyLabel + points}</p>
+        <p>
+          <label>{strings.game.pointsLabel}</label>
+          {points}
+        </p>
         <Grid
           cellNumber={cellNumber}
           molePositions={molePositions}

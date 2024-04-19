@@ -6,8 +6,8 @@ export const strings = {
     welcomeMessage: "Whack-a-Mole!",
   },
   game: {
-    pointsLabel: "Puntos: ",
-    difficultyLabel: "Dificultad:",
+    pointsLabel: "Puntos:",
+    difficultyLabel: "Dificultad",
     difficultyOptions: {
       baja: "Baja",
       media: "Media",
