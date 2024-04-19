@@ -22,18 +22,20 @@ const Home: React.FC = () => {
   };
 
   return (
-    <main className="container h-100">
-      <section className="w-75 h-100 m-auto bg-light border border-primary rounded p-5 d-flex flex-column justify-content-around align-items-center">
-        <h1 className="text-center">Bienvenido al Juego de Toca al Topo</h1>
-        <Input
-          name="nombre"
-          placeholder="Introduce tu nombre"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <Button className="w-100 text-center" onClick={handleStartGame}>
-          Start
-        </Button>
+    <main className="container">
+      <section className="w-75 m-auto bg-light border border-primary rounded p-5 d-flex flex-column justify-content-around align-items-center">
+        <div className="d-flex flex-column justify-content-around gap-5 align-items-center">
+          <h1 className="text-center">Bienvenido al Juego de Toca al Topo</h1>
+          <Input
+            name="nombre"
+            placeholder="Introduce tu nombre"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <Button className="w-100 text-center" onClick={handleStartGame}>
+            Start
+          </Button>
+        </div>
       </section>
     </main>
   );

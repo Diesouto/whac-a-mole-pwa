@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import GameService from "../services/GameService";
 import UserService from "../services/UserService";
 import Grid from "../components/Grid";
@@ -8,12 +8,15 @@ import Button from "../components/Button";
 const Game: React.FC = () => {
   const [points, setPoints] = useState(UserService.getPoints());
   const [difficulty, setDifficulty] = useState("bajo");
-  const [molePosition, setMolePosition] = useState<number>(-1); // Initialize mole position
+  const [molePositions, setMolePositions] = useState<number[]>([]);
   const [gameRunning, setGameRunning] = useState(false);
   const navigate = useNavigate();
   let intervalId: NodeJS.Timeout;
 
-  const handleWhack = () => {
+  const cellNumber = 9; // Define the maximum number of cells
+  const moleNumber = 2; // Define max number of moles
+
+  const handleWhack = (position: number) => {
     const pointsIncrement = GameService.getPointsIncrement(difficulty);
     setPoints(points + pointsIncrement);
 
@@ -21,7 +24,11 @@ const Game: React.FC = () => {
       navigator.vibrate(200);
     }
 
-    setMolePosition(-1);
+    // hide mole
+    const updatedMolePositions = molePositions.filter(
+      (pos) => pos !== position
+    );
+    setMolePositions(updatedMolePositions);
   };
 
   useEffect(() => {
@@ -36,14 +43,18 @@ const Game: React.FC = () => {
   const startGame = () => {
     setGameRunning(true);
     intervalId = setInterval(() => {
-      const newPosition = GameService.generateRandomMolePosition();
-      setMolePosition(newPosition);
-    }, GameService.getTimeInterval(difficulty));
+      const newPositions: number[] = [];
+      for (let i = 0; i < moleNumber; i++) {
+        const newPosition = GameService.generateRandomMolePosition();
+        newPositions.push(newPosition);
+      }
+      setMolePositions(newPositions);
+    }, GameService.getTimeInterval(difficulty) * 5);
   };
 
   const stopGame = () => {
     setPoints(0);
-    setMolePosition(-1);
+    setMolePositions([]);
     clearInterval(intervalId);
     setGameRunning(false);
   };
@@ -79,7 +90,11 @@ const Game: React.FC = () => {
       </nav>
       <section className="d-flex flex-column justify-content-around text-center">
         <p>Puntos: {points}</p>
-        <Grid molePosition={molePosition} handleWhack={handleWhack} />
+        <Grid
+          cellNumber={cellNumber}
+          molePositions={molePositions}
+          handleWhack={handleWhack}
+        />
         <Button onClick={gameRunning ? stopGame : startGame}>
           {gameRunning ? "Stop" : "Start"}
         </Button>
