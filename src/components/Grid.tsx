@@ -33,6 +33,8 @@ const Grid: React.FC<GridProps> = ({
         display: "grid",
         gridGap: "1em",
         gridTemplateColumns: "repeat(4, 1fr)",
+        maxWidth: "700px",
+        margin: "0 auto",
       }}
     >
       {renderCells()}
