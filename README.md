@@ -9,6 +9,11 @@ npm i
 npm run start
 ```
 
+## Comentarios
+
+- El número de topos y de celdas puede ajustarse desde la página de Game
+- El repositorio está enlazado con Netlify, por lo que hay despliegue continuo al publicar en main
+
 ## Enunciado:
 
 Queremos que crees una app móvil web progresiva basada en el juego de “Toca al topo”. Si no lo conoces no pasa nada, a continuación te detallamos el funcionamiento del mismo.
@@ -52,6 +57,5 @@ Envíanos un enlace al repositorio en el que se encuentre el código de la aplic
 
 ## Bonus points
 
-- Mostrar varios topos a la vez (Puede seleccionarse desde la página Game - moleNumber)
-- Incluir vibración en el dispositivo cada vez que el usuario mate un topo. (Añadida a través del método `Navigator: vibrate()`)
-- Capacidad de seleccionar el número de celdas de la aplicación (desde la página Game - cellNumber)
+- Mostrar varios topos a la vez
+- Incluir vibración en el dispositivo cada vez que el usuario mate un topo.

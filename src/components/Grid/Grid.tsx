@@ -1,5 +1,6 @@
 import React from "react";
-import Cell from "./Cell";
+import Cell from "../Cell/Cell";
+import "./Grid.css";
 
 interface GridProps {
   cellNumber: number;
@@ -29,12 +30,9 @@ const Grid: React.FC<GridProps> = ({
 
   return (
     <div
+      className="grid-container"
       style={{
-        display: "grid",
-        gridGap: "1em",
-        gridTemplateColumns: "repeat(4, 1fr)",
-        maxWidth: "700px",
-        margin: "0 auto",
+        gridTemplateColumns: `repeat(${cellNumber % 2 === 0 ? "4" : "3"}, 1fr)`,
       }}
     >
       {renderCells()}

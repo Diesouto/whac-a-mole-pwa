@@ -5,8 +5,8 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import Home from "./pages/Home";
-import Game from "./pages/Game";
+import Home from "./pages/Home/Home";
+import Game from "./pages/Game/Game";
 
 const App: React.FC = () => {
   return (
