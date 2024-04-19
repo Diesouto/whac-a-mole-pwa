@@ -32,7 +32,7 @@ const Cell: React.FC<CellProps> = ({ onWhack, isMoleVisible }) => {
         <img
           src="/mole.jpeg"
           alt="Mole"
-          style={{ maxWidth: "100%", maxHeight: "100%" }}
+          style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "cover" }}
         />
       )}
     </div>

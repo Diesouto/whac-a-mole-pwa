@@ -14,7 +14,7 @@ const Game: React.FC = () => {
   const navigate = useNavigate();
   let intervalId: NodeJS.Timeout;
 
-  const cellNumber = 9; // Define the maximum number of cells
+  const cellNumber = 12; // Define the maximum number of cells
   const moleNumber = 2; // Define max number of moles
 
   const handleWhack = (position: number) => {
@@ -73,7 +73,7 @@ const Game: React.FC = () => {
 
   return (
     <main className="container h-100">
-      <nav className="w-100 p-2 d-flex align-content-center justify-content-between bg-primary">
+      <nav className="w-100 p-2 d-flex align-content-center bg-primary">
         <h2 className="text-white flex-fill m-0">{UserService.getUser()}</h2>
         <label className="text-white" htmlFor="select-dificultad">
           {strings.game.difficultyLabel}
