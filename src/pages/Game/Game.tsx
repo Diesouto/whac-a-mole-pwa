@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import GameService from "../services/GameService";
-import UserService from "../services/UserService";
-import Grid from "../components/Grid";
-import Button from "../components/Button";
-import { strings } from "../resources/strings";
+import GameService from "../../services/GameService";
+import UserService from "../../services/UserService";
+import Grid from "../../components/Grid/Grid";
+import Button from "../../components/Button/Button";
+import { strings } from "../../resources/strings";
 
 const Game: React.FC = () => {
   const [points, setPoints] = useState(UserService.getPoints());

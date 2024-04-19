@@ -1,5 +1,5 @@
 import React from "react";
-import mole from "../assets/mole.jpeg";
+import mole from "../../assets/mole.jpeg";
 
 interface CellProps {
   onWhack: () => void;

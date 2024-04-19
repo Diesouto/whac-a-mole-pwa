@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../components/Button";
-import Input from "../components/Input";
-import UserService from "../services/UserService";
-import { strings } from "../resources/strings";
+import Button from "../../components/Button/Button";
+import Input from "../../components/Input/Input";
+import UserService from "../../services/UserService";
+import { strings } from "../../resources/strings";
 
 const Home: React.FC = () => {
   const [username, setUsername] = useState("");
