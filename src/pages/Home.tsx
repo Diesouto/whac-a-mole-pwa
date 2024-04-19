@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import UserService from "../services/UserService";
+import { strings } from "../resources/strings";
 
 const Home: React.FC = () => {
   const [username, setUsername] = useState("");
+  const [showValidationMessage, setShowValidationMessage] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,7 +16,7 @@ const Home: React.FC = () => {
 
   const handleStartGame = () => {
     if (username.trim() === "") {
-      alert("Por favor introduce un nombre de usuario válido.");
+      setShowValidationMessage(true);
       return;
     }
     UserService.setUser(username);
@@ -23,17 +25,22 @@ const Home: React.FC = () => {
 
   return (
     <main className="container">
-      <section className="w-75 m-auto bg-light border border-primary rounded p-5 d-flex flex-column justify-content-around align-items-center">
-        <div className="d-flex flex-column justify-content-around gap-5 align-items-center">
-          <h1 className="text-center">Bienvenido al Juego de Toca al Topo</h1>
+      <section className="shadow-lg w-75 m-auto bg-light border border-primary rounded p-5 d-flex flex-column justify-content-around align-items-center">
+        <div className="d-flex flex-column justify-content-around gap-3 align-items-center">
+          <h1 className="text-center">{strings.home.welcomeMessage}</h1>
           <Input
             name="nombre"
-            placeholder="Introduce tu nombre"
+            placeholder={strings.home.inputPlaceholder}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
+          {showValidationMessage && (
+            <span className="text-danger">
+              {strings.home.emptyUsernameError}
+            </span>
+          )}
           <Button className="w-100 text-center" onClick={handleStartGame}>
-            Start
+            {strings.home.startButtonText}
           </Button>
         </div>
       </section>

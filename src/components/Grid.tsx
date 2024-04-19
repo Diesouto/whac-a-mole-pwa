@@ -4,13 +4,13 @@ import Cell from "./Cell";
 interface GridProps {
   cellNumber: number;
   handleWhack: (i: number) => void;
-  molePositions: number[];
+  molePositions?: number[];
 }
 
 const Grid: React.FC<GridProps> = ({
   cellNumber,
   handleWhack,
-  molePositions,
+  molePositions = [],
 }) => {
   const renderCells = () => {
     const cells = [];

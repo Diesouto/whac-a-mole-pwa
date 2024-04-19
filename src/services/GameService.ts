@@ -3,9 +3,9 @@ class GameService {
     string,
     { timeInterval: number; pointsIncrement: number }
   > = {
-    bajo: { timeInterval: 1000, pointsIncrement: 10 },
-    medio: { timeInterval: 750, pointsIncrement: 20 },
-    alto: { timeInterval: 500, pointsIncrement: 30 },
+    baja: { timeInterval: 1000, pointsIncrement: 10 },
+    media: { timeInterval: 750, pointsIncrement: 20 },
+    alta: { timeInterval: 500, pointsIncrement: 30 },
   };
 
   static getTimeInterval(difficulty: string): number {

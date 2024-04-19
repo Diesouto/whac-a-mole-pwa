@@ -26,6 +26,7 @@ const Cell: React.FC<CellProps> = ({ onWhack, isMoleVisible }) => {
         alignItems: "center",
         backgroundColor: "white",
       }}
+      data-testid="cell"
     >
       {isMoleVisible && (
         <img

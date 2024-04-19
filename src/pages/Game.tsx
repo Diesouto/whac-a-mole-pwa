@@ -4,6 +4,7 @@ import GameService from "../services/GameService";
 import UserService from "../services/UserService";
 import Grid from "../components/Grid";
 import Button from "../components/Button";
+import { strings } from "../resources/strings";
 
 const Game: React.FC = () => {
   const [points, setPoints] = useState(UserService.getPoints());
@@ -31,15 +32,6 @@ const Game: React.FC = () => {
     setMolePositions(updatedMolePositions);
   };
 
-  useEffect(() => {
-    if (gameRunning) {
-      clearInterval(intervalId);
-      startGame();
-    }
-
-    return () => clearInterval(intervalId);
-  }, [gameRunning, difficulty]);
-
   const startGame = () => {
     setGameRunning(true);
     intervalId = setInterval(() => {
@@ -49,7 +41,7 @@ const Game: React.FC = () => {
         newPositions.push(newPosition);
       }
       setMolePositions(newPositions);
-    }, GameService.getTimeInterval(difficulty) * 5);
+    }, GameService.getTimeInterval(difficulty));
   };
 
   const stopGame = () => {
@@ -70,26 +62,36 @@ const Game: React.FC = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (gameRunning) {
+      clearInterval(intervalId);
+      startGame();
+    }
+
+    return () => clearInterval(intervalId);
+  }, [gameRunning, difficulty]);
+
   return (
     <main className="container h-100">
       <nav className="w-100 p-2 d-flex align-content-center justify-content-between bg-primary">
         <h2 className="text-white flex-fill m-0">{UserService.getUser()}</h2>
-        <label className="text-white" htmlFor="dificultad">
-          Dificultad:
+        <label className="text-white" htmlFor="select-dificultad">
+          {strings.game.difficultyLabel}
         </label>
         <select
-          id="dificultad"
+          id="select-dificultad"
+          role="combobox"
           className="form-select w-auto"
           value={difficulty}
           onChange={(e) => setDifficulty(e.target.value)}
         >
-          <option value="bajo">Baja</option>
-          <option value="medio">Media</option>
-          <option value="alto">Alta</option>
+          <option value="baja">{strings.game.difficultyOptions.baja}</option>
+          <option value="media">{strings.game.difficultyOptions.media}</option>
+          <option value="alta">{strings.game.difficultyOptions.alta}</option>
         </select>
       </nav>
       <section className="d-flex flex-column justify-content-around text-center">
-        <p>Puntos: {points}</p>
+        <p>{strings.game.difficultyLabel + points}</p>
         <Grid
           cellNumber={cellNumber}
           molePositions={molePositions}
