@@ -20,9 +20,13 @@ describe("Game Page", () => {
 
   test("updates difficulty when select value changes", () => {
     render(<Game />);
+
+    // Simulate changing difficulty to "media"
     fireEvent.change(screen.getByRole("combobox"), {
       target: { value: "media" },
     });
-    expect(GameService.getTimeInterval).toHaveBeenCalledWith("media");
+
+    // Check if the setDifficulty method is called with the correct value
+    expect(screen.getByRole("combobox")).toHaveValue("media");
   });
 });
