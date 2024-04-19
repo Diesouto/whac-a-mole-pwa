@@ -8,7 +8,7 @@ import { strings } from "../resources/strings";
 
 const Game: React.FC = () => {
   const [points, setPoints] = useState(UserService.getPoints());
-  const [difficulty, setDifficulty] = useState("bajo");
+  const [difficulty, setDifficulty] = useState("baja");
   const [molePositions, setMolePositions] = useState<number[]>([]);
   const [gameRunning, setGameRunning] = useState(false);
   const navigate = useNavigate();
