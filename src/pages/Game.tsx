@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import GameService from "../services/GameService";
 import UserService from "../services/UserService";
@@ -12,9 +12,9 @@ const Game: React.FC = () => {
   const [molePositions, setMolePositions] = useState<number[]>([]);
   const [gameRunning, setGameRunning] = useState(false);
   const navigate = useNavigate();
-  let intervalId: NodeJS.Timeout;
+  const intervalIdRef = useRef<NodeJS.Timeout | null>(null);
 
-  const cellNumber = 12; // Define the maximum number of cells
+  const cellNumber = 9; // Define the maximum number of cells
   const moleNumber = 2; // Define max number of moles
 
   const handleWhack = (position: number) => {
@@ -32,9 +32,9 @@ const Game: React.FC = () => {
     setMolePositions(updatedMolePositions);
   };
 
-  const startGame = () => {
+  const startGame = useCallback(() => {
     setGameRunning(true);
-    intervalId = setInterval(() => {
+    intervalIdRef.current = setInterval(() => {
       const newPositions: number[] = [];
       for (let i = 0; i < moleNumber; i++) {
         const newPosition = GameService.generateRandomMolePosition();
@@ -42,38 +42,38 @@ const Game: React.FC = () => {
       }
       setMolePositions(newPositions);
     }, GameService.getTimeInterval(difficulty));
-  };
+  }, [difficulty, moleNumber]);
 
   const stopGame = () => {
     setPoints(0);
     setMolePositions([]);
-    clearInterval(intervalId);
+    clearInterval(intervalIdRef.current!);
     setGameRunning(false);
   };
 
-  function logOut() {
+  const logOut = useCallback(() => {
     UserService.logOut();
     navigate("/");
-  }
+  }, [navigate]);
 
   useEffect(() => {
     if (!UserService.getUser()) {
       logOut();
     }
-  }, []);
+  }, [logOut]);
 
   useEffect(() => {
     if (gameRunning) {
-      clearInterval(intervalId);
+      clearInterval(intervalIdRef.current!);
       startGame();
     }
 
-    return () => clearInterval(intervalId);
-  }, [gameRunning, difficulty]);
+    return () => clearInterval(intervalIdRef.current!);
+  }, [gameRunning, startGame]);
 
   return (
     <main className="container h-100">
-      <nav className="w-100 p-2 d-flex align-content-center bg-primary">
+      <nav className="w-100 p-2 d-flex align-content-center justify-content-between bg-primary">
         <h2 className="text-white flex-fill m-0">{UserService.getUser()}</h2>
         <label className="text-white" htmlFor="select-dificultad">
           {strings.game.difficultyLabel}
