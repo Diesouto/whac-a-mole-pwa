@@ -14,17 +14,27 @@ const Cell: React.FC<CellProps> = ({ onWhack, isMoleVisible }) => {
 
   return (
     <div
-      className={`cell ${isMoleVisible ? "mole" : ""}`}
+      className="cell"
       onClick={handleCellClick}
       style={{
-        width: "calc(100vw / 3)",
-        height: "calc(100vh / 3)",
+        width: "calc(60vw / 3)",
+        height: "calc(60vh / 3)",
         border: "1px solid black",
         boxSizing: "border-box",
-        display: "inline-block",
-        backgroundColor: isMoleVisible ? "brown" : "grey",
+        display: "inline-flex",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "white",
       }}
-    ></div>
+    >
+      {isMoleVisible && (
+        <img
+          src="/mole.jpeg"
+          alt="Mole"
+          style={{ maxWidth: "100%", maxHeight: "100%" }}
+        />
+      )}
+    </div>
   );
 };
 

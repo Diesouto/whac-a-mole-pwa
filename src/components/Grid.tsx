@@ -21,7 +21,7 @@ const Grid: React.FC<GridProps> = ({ molePosition, handleWhack }) => {
     return cells;
   };
 
-  return <div className="grid">{renderCells()}</div>;
+  return <div className="grid d-flex flex-wrap">{renderCells()}</div>;
 };
 
 export default Grid;
