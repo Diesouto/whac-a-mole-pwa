@@ -32,7 +32,7 @@ const Grid: React.FC<GridProps> = ({
       style={{
         display: "grid",
         gridGap: "1em",
-        gridTemplateColumns: "repeat(4, 1fr)",
+        gridTemplateColumns: `repeat(${cellNumber % 2 === 0 ? "4" : "3"}, 1fr)`,
         maxWidth: "700px",
         margin: "0 auto",
       }}
