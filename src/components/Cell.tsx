@@ -1,4 +1,5 @@
 import React from "react";
+import mole from "../assets/mole.jpeg";
 
 interface CellProps {
   onWhack: () => void;
@@ -14,25 +15,19 @@ const Cell: React.FC<CellProps> = ({ onWhack, isMoleVisible }) => {
 
   return (
     <div
-      className="cell"
+      className="container border border-primary d-inline-flex justify-content-center align-items-center bg-white"
       onClick={handleCellClick}
       style={{
-        width: "calc(60vw / 3)",
-        height: "calc(60vh / 3)",
-        border: "1px solid black",
-        boxSizing: "border-box",
-        display: "inline-flex",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "white",
+        width: "calc(60vw/4)",
+        height: "calc(60vw/4)",
       }}
       data-testid="cell"
     >
       {isMoleVisible && (
         <img
-          src="/mole.jpeg"
+          className="w-100 h-100 p-0 m-0 object-fit-cover"
+          src={mole}
           alt="Mole"
-          style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "cover" }}
         />
       )}
     </div>

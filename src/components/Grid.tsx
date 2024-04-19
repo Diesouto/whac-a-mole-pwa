@@ -27,7 +27,17 @@ const Grid: React.FC<GridProps> = ({
     return cells;
   };
 
-  return <div className="grid">{renderCells()}</div>;
+  return (
+    <div
+      style={{
+        display: "grid",
+        gridGap: "1em",
+        gridTemplateColumns: "repeat(4, 1fr)",
+      }}
+    >
+      {renderCells()}
+    </div>
+  );
 };
 
 export default Grid;

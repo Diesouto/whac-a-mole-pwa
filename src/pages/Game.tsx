@@ -46,7 +46,7 @@ const Game: React.FC = () => {
 
   const stopGame = () => {
     setPoints(0);
-    setMolePositions([]);
+    // setMolePositions([]);
     clearInterval(intervalIdRef.current!);
     setGameRunning(false);
   };
@@ -90,7 +90,7 @@ const Game: React.FC = () => {
           <option value="alta">{strings.game.difficultyOptions.alta}</option>
         </select>
       </nav>
-      <section className="d-flex flex-column justify-content-around text-center">
+      <section className="d-flex flex-column justify-content-around text-center h-75">
         <p>
           <label>{strings.game.pointsLabel}</label>
           {points}
