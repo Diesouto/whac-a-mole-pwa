@@ -40,7 +40,7 @@ describe("Home Page", () => {
       .spyOn(UserService, "getUser")
       .mockReturnValueOnce("");
     render(<Home />, { wrapper: MemoryRouter });
-    expect(screen.queryByText(strings.home.welcomeMessage)).toBeInTheDocument();
+    expect(screen.getByText(strings.home.welcomeMessage)).toBeInTheDocument();
     getUserMock.mockRestore();
   });
 

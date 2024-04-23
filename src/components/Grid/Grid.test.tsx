@@ -1,6 +1,5 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import { strings } from "../../resources/strings";
+import { render, screen } from "@testing-library/react";
 import Grid from "./Grid";
 
 describe("Grid Component", () => {
@@ -8,14 +7,14 @@ describe("Grid Component", () => {
     const cellNumber = 9;
     const molePositions = [-1];
     const handleWhack = jest.fn();
-    const { getAllByTestId } = render(
+    render(
       <Grid
         cellNumber={cellNumber}
         molePositions={molePositions}
         handleWhack={handleWhack}
       />
     );
-    const cells = getAllByTestId("cell");
+    const cells = screen.getAllByTestId("cell");
     expect(cells.length).toBe(cellNumber);
   });
 });

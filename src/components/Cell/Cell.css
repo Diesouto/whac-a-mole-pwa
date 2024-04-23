@@ -5,14 +5,10 @@
   max-height: 100px;
 }
 
-.cell:hover {
-  cursor: pointer;
-}
-
 .cell__img {
   width: 100%;
   height: 100%;
   padding: 0;
   margin: 0;
-  object-fit: cover;
+  object-fit: contain;
 }

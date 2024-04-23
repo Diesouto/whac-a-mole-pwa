@@ -1,12 +1,11 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { strings } from "../../resources/strings";
 import Input from "./Input";
 
 describe("Input Component", () => {
   test("renders input with given placeholder", () => {
     const placeholder = "Introduce tu nombre";
-    const { getByPlaceholderText } = render(
+    render(
       <Input
         name="nombre"
         placeholder={placeholder}
@@ -14,13 +13,13 @@ describe("Input Component", () => {
         onChange={() => {}}
       />
     );
-    const input = getByPlaceholderText(placeholder);
+    const input = screen.getByPlaceholderText(placeholder);
     expect(input).toBeInTheDocument();
   });
 
   test("calls onChange handler when input value changes", () => {
     const onChange = jest.fn();
-    const { getByPlaceholderText } = render(
+    render(
       <Input
         name="nombre"
         placeholder="Introduce tu nombre"
@@ -28,7 +27,7 @@ describe("Input Component", () => {
         onChange={onChange}
       />
     );
-    const input = getByPlaceholderText("Introduce tu nombre");
+    const input = screen.getByPlaceholderText("Introduce tu nombre");
     fireEvent.change(input, { target: { value: "test" } });
     expect(onChange).toHaveBeenCalled();
   });

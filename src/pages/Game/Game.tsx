@@ -7,15 +7,17 @@ import Button from "../../components/Button/Button";
 import { strings } from "../../resources/strings";
 
 const Game: React.FC = () => {
+  const maxTime = 60; // Define the max game time
+  const cellNumber = 9; // Define the maximum number of cells
+  const moleNumber = 2; // Define max number of moles
+
   const [points, setPoints] = useState(UserService.getPoints());
   const [difficulty, setDifficulty] = useState("baja");
   const [molePositions, setMolePositions] = useState<number[]>([]);
   const [gameRunning, setGameRunning] = useState(false);
+  const [remainingTime, setRemainingTime] = useState(maxTime); // 1 minute timer
   const navigate = useNavigate();
   const intervalIdRef = useRef<NodeJS.Timeout | null>(null);
-
-  const cellNumber = 9; // Define the maximum number of cells
-  const moleNumber = 2; // Define max number of moles
 
   const handleWhack = (position: number) => {
     const pointsIncrement = GameService.getPointsIncrement(difficulty);
@@ -33,8 +35,11 @@ const Game: React.FC = () => {
   };
 
   const startGame = useCallback(() => {
+    setPoints(0);
     setGameRunning(true);
+    setRemainingTime(maxTime);
     intervalIdRef.current = setInterval(() => {
+      setRemainingTime((prevTime) => prevTime - 1);
       const newPositions: number[] = [];
       for (let i = 0; i < moleNumber; i++) {
         const newPosition = GameService.generateRandomMolePosition();
@@ -44,12 +49,12 @@ const Game: React.FC = () => {
     }, GameService.getTimeInterval(difficulty));
   }, [difficulty, moleNumber]);
 
-  const stopGame = () => {
-    setPoints(0);
+  const stopGame = useCallback(() => {
     setMolePositions([]);
+    setRemainingTime(0);
     clearInterval(intervalIdRef.current!);
     setGameRunning(false);
-  };
+  }, [intervalIdRef]);
 
   const logOut = useCallback(() => {
     UserService.logOut();
@@ -71,6 +76,12 @@ const Game: React.FC = () => {
     return () => clearInterval(intervalIdRef.current!);
   }, [gameRunning, startGame]);
 
+  useEffect(() => {
+    if (gameRunning && remainingTime === 0) {
+      stopGame();
+    }
+  }, [gameRunning, remainingTime, stopGame]);
+
   return (
     <main className="container h-100">
       <nav className="w-100 p-2 d-flex align-content-center justify-content-between bg-primary">
@@ -91,6 +102,9 @@ const Game: React.FC = () => {
         </select>
       </nav>
       <section className="d-flex flex-column justify-content-around text-center h-75">
+        <p>
+          {strings.game.timeLabel} {remainingTime}
+        </p>
         <p>
           <label>{strings.game.pointsLabel}</label>
           {points}

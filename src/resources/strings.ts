@@ -8,6 +8,7 @@ export const strings = {
   game: {
     pointsLabel: "Puntos:",
     difficultyLabel: "Dificultad:",
+    timeLabel: "Tiempo:",
     difficultyOptions: {
       baja: "Baja",
       media: "Media",

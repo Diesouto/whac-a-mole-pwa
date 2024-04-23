@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import mole from "../../assets/mole.jpeg";
+import explosion from "../../assets/explosion.png";
 import "./Cell.css";
 
 interface CellProps {
@@ -8,9 +9,15 @@ interface CellProps {
 }
 
 const Cell: React.FC<CellProps> = ({ onWhack, isMoleVisible }) => {
+  const [hasBeenWhacked, setHasBeenWhacked] = useState(false);
+
   const handleCellClick = () => {
     if (isMoleVisible) {
       onWhack();
+      setHasBeenWhacked(true);
+      setTimeout(() => {
+        setHasBeenWhacked(false);
+      }, 200);
     }
   };
 
@@ -20,7 +27,11 @@ const Cell: React.FC<CellProps> = ({ onWhack, isMoleVisible }) => {
       onClick={handleCellClick}
       data-testid="cell"
     >
-      {isMoleVisible && <img className="cell__img" src={mole} alt="Mole" />}
+      {hasBeenWhacked ? (
+        <img className="cell__img" src={explosion} alt="Explosion" />
+      ) : (
+        isMoleVisible && <img className="cell__img" src={mole} alt="Topo" />
+      )}
     </div>
   );
 };

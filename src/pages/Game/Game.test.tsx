@@ -1,11 +1,9 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, act } from "@testing-library/react";
 import Game from "./Game";
-import GameService from "../../services/GameService";
 import { strings } from "../../resources/strings";
 
 // Mocks
-jest.mock("../../services/GameService");
 const mockUsedNavigate = jest.fn();
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
@@ -26,5 +24,15 @@ describe("Game Page", () => {
     });
 
     expect(screen.getByRole("combobox")).toHaveValue("media");
+  });
+
+  test("stops game after time runs out", () => {
+    jest.useFakeTimers();
+    render(<Game />);
+    act(() => {
+      jest.advanceTimersByTime(60000);
+    });
+    expect(screen.getByText("Start")).toBeInTheDocument();
+    jest.useRealTimers();
   });
 });
