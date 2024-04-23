@@ -28,9 +28,16 @@ const Cell: React.FC<CellProps> = ({ onWhack, isMoleVisible }) => {
       data-testid="cell"
     >
       {hasBeenWhacked ? (
-        <img className="cell__img" src={explosion} alt="Explosion" />
+        <img
+          draggable="false"
+          className="cell__img"
+          src={explosion}
+          alt="Explosion"
+        />
       ) : (
-        isMoleVisible && <img className="cell__img" src={mole} alt="Topo" />
+        isMoleVisible && (
+          <img draggable="false" className="cell__img" src={mole} alt="Topo" />
+        )
       )}
     </div>
   );
